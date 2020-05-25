@@ -1,10 +1,6 @@
-import pk3proc
-
-# execute a shell script
-returncode, out, err = pk3proc.shell_script('ls / | grep bin')
-print returncode
-print out
-# output:
-# > 0
-# > bin
-# > sbin
+import pk3hunum
+print pk3hunum.hunum({
+    'total': 10240,
+    'progress': [1, 1024*2.1, 1024*3.2],
+})
+# {"total" : "10K", "progress" : [1, "2.1K", "3.2K"]}

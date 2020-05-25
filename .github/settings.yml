@@ -1,6 +1,6 @@
 _extends: gh-config
 
 repository:
-  description: no desc
+  description: Convert number to human readable format in a string.
   homepage: https://blog.openacid.com
-  topics: tag1, tag2
+  topics: human, readable, number, digit, integer

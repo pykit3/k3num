@@ -1,29 +1,25 @@
-# pk3proc
+# pk3hunum
 
-[![Build Status](https://travis-ci.com/pykit3/pk3proc.svg?branch=master)](https://travis-ci.com/pykit3/pk3proc)
-[![Documentation Status](https://readthedocs.org/projects/pk3proc/badge/?version=stable)](https://pk3proc.readthedocs.io/en/stable/?badge=stable)
+[![Build Status](https://travis-ci.com/pykit3/pk3hunum.svg?branch=master)](https://travis-ci.com/pykit3/pk3hunum)
+[![Documentation Status](https://readthedocs.org/projects/pk3hunum/badge/?version=stable)](https://pk3hunum.readthedocs.io/en/stable/?badge=stable)
 
-no desc
+Convert number to human readable format in a string.
 
 # Install
 
 ```
-pip install pk3proc
+pip install pk3hunum
 ```
 
 # Synopsis
 
 ```python
-import pk3proc
-
-# execute a shell script
-returncode, out, err = pk3proc.shell_script('ls / | grep bin')
-print returncode
-print out
-# output:
-# > 0
-# > bin
-# > sbin
+import pk3hunum
+print pk3hunum.hunum({
+    'total': 10240,
+    'progress': [1, 1024*2.1, 1024*3.2],
+})
+# {"total" : "10K", "progress" : [1, "2.1K", "3.2K"]}
 ```
 
 #   Author
