@@ -43,7 +43,7 @@ from .readable import (
     unit_to_value,
 )
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 _name = 'k3num'
 
 __all__ = [
