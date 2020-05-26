@@ -94,8 +94,8 @@ def hunum(data, unit=None, include=None, exclude=None):
             -   It has no effect on a primitive `data`.
             -   It is not passed to sub `dict` or `list`.
 
-        exclude: specifies **NOT** to convert some of the keys of a `dict` `data`.
-            It could be a `list`, `tuple` or `set` of keys.
+        exclude(bool): specifies **NOT** to convert some of the keys of a `dict`
+            `data`.  It could be a `list`, `tuple` or `set` of keys.
 
             -   It has no effect on a primitive `data`.
             -   It is not passed to sub `dict` or `list`.
@@ -166,13 +166,6 @@ def parsenum(data, safe=None):
     Parse humanized number string like `10.5K` to `int` or `float`.
     It also parses percentage number to `float`.
 
-    Examples::
-
-        >>> pk3hunum.parsenum('1.01k')
-        # 10342.4
-        >>> pk3hunum.parsenum('10.3%')
-        # 0.103
-
     Args:
         data(str): number string.
 
@@ -235,3 +228,7 @@ def parsenum(data, safe=None):
             raise
 
     return val
+
+# if __name__ == "__main__":
+#     import doctest
+#     doctest.testmod()
