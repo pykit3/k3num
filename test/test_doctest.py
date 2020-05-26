@@ -1,7 +1,7 @@
 import unittest
 import doctest
-import pk3hunum
+import k3num
 
 def load_tests(loader, tests, ignore):
-    tests.addTests(doctest.DocTestSuite(pk3hunum))
+    tests.addTests(doctest.DocTestSuite(k3num))
     return tests

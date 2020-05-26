@@ -1,10 +1,10 @@
 import types
 import unittest
 
-import pk3hunum
-import pk3ut
+import k3num
+import k3ut
 
-dd = pk3ut.dd
+dd = k3ut.dd
 
 
 class TestHunum(unittest.TestCase):
@@ -39,7 +39,7 @@ class TestHunum(unittest.TestCase):
 
         for _in, _out, _msg in cases:
 
-            rst = pk3hunum.hunum(_in)
+            rst = k3num.readable(_in)
 
             msg = 'humanize: in: {_in} expect: {_out}, rst: {rst}; {_msg}'.format(
                 _in=repr(_in),
@@ -50,13 +50,13 @@ class TestHunum(unittest.TestCase):
 
             self.assertEqual(_out, rst, msg)
 
-            rst = pk3hunum.hunum(-_in)
+            rst = k3num.readable(-_in)
 
             if _in > 0:
                 _out = '-' + _out
             self.assertEqual(_out, rst, msg + ': negative')
 
-        self.assertIs(True, pk3hunum.hunum(True))
+        self.assertIs(True, k3num.readable(True))
 
     def test_parse_number(self):
 
@@ -92,7 +92,7 @@ class TestHunum(unittest.TestCase):
 
         for _in, _out, _msg in cases:
 
-            rst = pk3hunum.parsenum(_in)
+            rst = k3num.parsenum(_in)
 
             msg = 'parse: in: {_in} expect: {_out}, rst: {rst}; {_msg}'.format(
                 _in=repr(_in),
@@ -102,15 +102,15 @@ class TestHunum(unittest.TestCase):
             )
 
             self.assertEqual(_out, rst, msg)
-            self.assertEqual(0 - _out, pk3hunum.parsenum('-' + _in), msg + ': negative')
+            self.assertEqual(0 - _out, k3num.parsenum('-' + _in), msg + ': negative')
 
             # test bytes
-            self.assertEqual(_out, pk3hunum.parsenum(bytes(_in, 'utf-8')), "string in bytes:" + msg)
+            self.assertEqual(_out, k3num.parsenum(bytes(_in, 'utf-8')), "string in bytes:" + msg)
 
             for suff in suffixes:
 
                 dd('parseint:', _in, ' suffix: ', suff)
-                self.assertEqual(int(_out), pk3hunum.parseint(_in + suff),
+                self.assertEqual(int(_out), k3num.parseint(_in + suff),
                                  msg + '; parseint with suffix: ' + repr(suff))
 
     def test_parse_percentage(self):
@@ -131,7 +131,7 @@ class TestHunum(unittest.TestCase):
 
         for _in, expected in cases:
 
-            rst = pk3hunum.parsenum(_in)
+            rst = k3num.parsenum(_in)
 
             msg = 'parse: in: {_in} expect: {expected}, rst: {rst}'.format(
                 _in=repr(_in),
@@ -141,7 +141,7 @@ class TestHunum(unittest.TestCase):
 
             self.assertTrue(0.000000001 > expected - rst > -0.000000001, msg)
 
-            self.assertEqual(int(expected), pk3hunum.parseint(_in), 'int: ' + msg)
+            self.assertEqual(int(expected), k3num.parseint(_in), 'int: ' + msg)
 
     def test_safe_parse(self):
 
@@ -160,7 +160,7 @@ class TestHunum(unittest.TestCase):
 
         for _in, expected in cases:
 
-            rst = pk3hunum.parsenum(_in, safe=True)
+            rst = k3num.parsenum(_in, safe=True)
 
             msg = 'parse: in: {_in} expect: {expected}, rst: {rst}'.format(
                 _in=repr(_in),
@@ -172,7 +172,7 @@ class TestHunum(unittest.TestCase):
             self.assertEqual(expected, rst)
 
             if not isinstance(expected, (str, bytes)):
-                rst = pk3hunum.parseint(_in, safe=True)
+                rst = k3num.parseint(_in, safe=True)
                 self.assertEqual(int(expected), rst)
 
     def test_specified_unit(self):
@@ -184,7 +184,7 @@ class TestHunum(unittest.TestCase):
 
         for _in, _out, _msg in cases:
 
-            rst = pk3hunum.hunum(_in[0], **_in[1])
+            rst = k3num.readable(_in[0], **_in[1])
 
             msg = 'in: {_in} expect: {_out}, rst: {rst}; {_msg}'.format(
                 _in=repr(_in),
@@ -205,7 +205,7 @@ class TestHunum(unittest.TestCase):
 
         for _in, _out, _msg in cases:
 
-            rst = pk3hunum.hunum(_in)
+            rst = k3num.readable(_in)
 
             msg = 'in: {_in} expect: {_out}, rst: {rst}; {_msg}'.format(
                 _in=repr(_in),
@@ -232,7 +232,7 @@ class TestHunum(unittest.TestCase):
 
         for _in, _out, _msg in cases:
 
-            rst = pk3hunum.hunum(_in[0], **_in[1])
+            rst = k3num.readable(_in[0], **_in[1])
 
             msg = 'in: {_in} expect: {_out}, rst: {rst}; {_msg}'.format(
                 _in=repr(_in),
@@ -246,7 +246,7 @@ class TestHunum(unittest.TestCase):
 
     def test_unit(self):
 
-        self.assertEqual('', pk3hunum.value_to_unit[1])
+        self.assertEqual('', k3num.value_to_unit[1])
 
         cases = (
                 (1024**1, 'K'),
@@ -261,14 +261,14 @@ class TestHunum(unittest.TestCase):
 
         for inp, expected in cases:
 
-            rst = pk3hunum.value_to_unit[inp]
+            rst = k3num.value_to_unit[inp]
             self.assertEqual(expected, rst)
 
-            rst = pk3hunum.unit_to_value[expected]
+            rst = k3num.unit_to_value[expected]
             self.assertEqual(inp, rst)
 
             with self.assertRaises(KeyError):
-                pk3hunum.value_to_unit[inp + 1]
+                k3num.value_to_unit[inp + 1]
 
             with self.assertRaises(KeyError):
-                pk3hunum.value_to_unit[inp - 1]
+                k3num.value_to_unit[inp - 1]

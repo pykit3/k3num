@@ -17,4 +17,4 @@ import _building
  master_doc,
  html_theme,
  html_static_path,
-) = _building.sphinx_confs("pk3hunum")
+) = _building.sphinx_confs("k3num")

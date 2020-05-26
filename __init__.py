@@ -1,10 +1,10 @@
 """
-pk3hunum convert numbers(or numbers in `dict` or `list`) to human readable
+k3num convert numbers(or numbers in `dict` or `list`) to human readable
 format in string.
 
->>> hunum(103425)
+>>> readable(103425)
 '101.0K'
->>> hunum({ 'total': 10240, 'progress': [1, 1024*2.1, 1024*3.2], })
+>>> readable({ 'total': 10240, 'progress': [1, 1024*2.1, 1024*3.2], })
 {'total': '10K', 'progress': ['1', '2.10K', '3.20K']}
 >>> parsenum('5.2K')
 5324.8
@@ -26,7 +26,7 @@ Attributes:
 
 """
 
-from .hunum import (
+from .readable import (
     K,
     M,
     G,
@@ -35,7 +35,7 @@ from .hunum import (
     E,
     Z,
     Y,
-    hunum,
+    readable,
     parsenum,
     parseint,
 
@@ -43,8 +43,8 @@ from .hunum import (
     unit_to_value,
 )
 
-__version__ = '0.1.0'
-_name = 'pk3hunum'
+__version__ = '0.1.1'
+_name = 'k3num'
 
 __all__ = [
     'K',
@@ -55,7 +55,7 @@ __all__ = [
     'E',
     'Z',
     'Y',
-    'hunum',
+    'readable',
     'parsenum',
     'parseint',
 

@@ -70,9 +70,9 @@ def hunum_int(i, unit=None):
     return minus + ('%.' + str(vlen) + 'f%s') % (v, value_to_unit[unit])
 
 
-def hunum(data, unit=None, include=None, exclude=None):
+def readable(data, unit=None, include=None, exclude=None):
     """
-    hunum convert number or dict/list of number to string in a format easy to read for human.
+    readable convert number or dict/list of number to string in a format easy to read for human.
 
     Args:
         data: could be a primitive type: `int` or `float`,
@@ -122,7 +122,7 @@ def hunum(data, unit=None, include=None, exclude=None):
             keys = keys - set(exclude)
 
         for k in keys:
-            data[k] = hunum(data[k])
+            data[k] = readable(data[k])
 
         return data
 
@@ -134,7 +134,7 @@ def hunum(data, unit=None, include=None, exclude=None):
         return data
 
     elif isinstance(data, list):
-        return [hunum(x) for x in data]
+        return [readable(x) for x in data]
 
     elif isinstance(data, (str, bytes)):
         return data
