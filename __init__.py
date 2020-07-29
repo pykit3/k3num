@@ -24,6 +24,47 @@ Attributes:
 
     unit_to_value(dict): reverse map of `value_to_unit`.
 
+
+k3num.Hex provides hex integer with arithmatic support.
+
+Different ways to create a 4-byte crc32 hex str:
+
+>>> Hex(0x0102, 4)
+'00000102'
+>>> Hex(0x0102, 'crc32')
+'00000102'
+>>> Hex.crc32(0x0102)
+'00000102'
+>>> Hex('00000102', 'crc32')
+'00000102'
+>>> Hex.crc32('00000102')
+'00000102'
+
+
+Create with a tuple of prefix and a filling byte
+
+>>> Hex(('12', 1), 'crc32')
+'12010101'
+
+
+Arithmetic operations
+
+>>> Hex(0x0102, 'crc32') + 1
+'00000103'
+>>> Hex(0x0102, 'crc32') * 2
+'00000204'
+>>> Hex(0x0102, 'crc32') - 1000000
+'00000000'
+>>> Hex(0x0102, 'crc32') * 1000000000
+'ffffffff'
+
+
+Iterate over sha1 space with a specific step:
+
+>>> Hex.sha1(0) + Hex.sha1(('10', 0))
+'1000000000000000000000000000000000000000'
+>>> Hex.sha1(0) + Hex.sha1(('10', 0)) * 2
+'2000000000000000000000000000000000000000'
 """
 
 from .readable import (
@@ -41,6 +82,10 @@ from .readable import (
 
     value_to_unit,
     unit_to_value,
+)
+
+from .hex import (
+    Hex,
 )
 
 __version__ = '0.1.2'
@@ -61,4 +106,6 @@ __all__ = [
 
     'value_to_unit',
     'unit_to_value',
+
+    'Hex',
 ]
