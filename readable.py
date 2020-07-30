@@ -1,7 +1,6 @@
 #!/usr/bin/env python2
 # coding: utf-8
 
-import types
 
 K = 1024 ** 1
 M = 1024 ** 2
