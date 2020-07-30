@@ -6,6 +6,8 @@
 k3num
 ==========
 
+.. automodule:: k3num
+
 pykit3 is is a collection of toolkit in python3.
 
 .. toctree::
@@ -15,7 +17,10 @@ pykit3 is is a collection of toolkit in python3.
 Documentation for the Code
 **************************
 
-.. automodule:: k3num
+Classes
+-------
+
+.. autoclass:: Hex
 
 Functions
 ---------
