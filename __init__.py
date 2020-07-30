@@ -88,7 +88,7 @@ from .hex import (
     Hex,
 )
 
-__version__ = '0.1.3'
+__version__ = '0.1.4'
 _name = 'k3num'
 
 __all__ = [
