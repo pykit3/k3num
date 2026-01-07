@@ -67,6 +67,10 @@ Iterate over sha1 space with a specific step::
     '2000000000000000000000000000000000000000'
 """
 
+from importlib.metadata import version
+
+__version__ = version("k3num")
+
 from .readable import (
     K,
     M,
@@ -79,7 +83,6 @@ from .readable import (
     readable,
     parsenum,
     parseint,
-
     value_to_unit,
     unit_to_value,
 )
@@ -88,24 +91,19 @@ from .hex import (
     Hex,
 )
 
-__version__ = '0.1.7'
-__name__ = 'k3num'
-
 __all__ = [
-    'K',
-    'M',
-    'G',
-    'T',
-    'P',
-    'E',
-    'Z',
-    'Y',
-    'readable',
-    'parsenum',
-    'parseint',
-
-    'value_to_unit',
-    'unit_to_value',
-
-    'Hex',
+    "K",
+    "M",
+    "G",
+    "T",
+    "P",
+    "E",
+    "Z",
+    "Y",
+    "readable",
+    "parsenum",
+    "parseint",
+    "value_to_unit",
+    "unit_to_value",
+    "Hex",
 ]

@@ -2,47 +2,42 @@
 # coding: utf-8
 
 
-K = 1024 ** 1
-M = 1024 ** 2
-G = 1024 ** 3
-T = 1024 ** 4
-P = 1024 ** 5
-E = 1024 ** 6
-Z = 1024 ** 7
-Y = 1024 ** 8
+K = 1024**1
+M = 1024**2
+G = 1024**3
+T = 1024**4
+P = 1024**5
+E = 1024**6
+Z = 1024**7
+Y = 1024**8
 
 value_to_unit = {
-    1: '',
-    K: 'K',
-    M: 'M',
-    G: 'G',
-    T: 'T',
-    P: 'P',
-    E: 'E',
-    Z: 'Z',
-    Y: 'Y',
+    1: "",
+    K: "K",
+    M: "M",
+    G: "G",
+    T: "T",
+    P: "P",
+    E: "E",
+    Z: "Z",
+    Y: "Y",
 }
 
-unit_to_value = dict([(v, k)
-                      for (k, v) in value_to_unit.items()
-                      if v != ''
-                      ])
+unit_to_value = dict([(v, k) for (k, v) in value_to_unit.items() if v != ""])
 
-integer_types = (type(0), )
+integer_types = (type(0),)
 
 
 def hunum_int(i, unit=None):
-
     i = int(i)
 
     if i < 0:
-        minus = '-'
+        minus = "-"
         i = -i
     else:
-        minus = ''
+        minus = ""
 
     if unit is None:
-
         unit = K
 
         # keep at least 2 digit
@@ -57,7 +52,7 @@ def hunum_int(i, unit=None):
     v = i * 1.0 / unit
 
     if v == int(v):
-        return minus + '%d%s' % (v, value_to_unit[unit])
+        return minus + "%d%s" % (v, value_to_unit[unit])
 
     if v > 10:
         vlen = 1
@@ -66,7 +61,7 @@ def hunum_int(i, unit=None):
     else:
         vlen = 3
 
-    return minus + ('%.' + str(vlen) + 'f%s') % (v, value_to_unit[unit])
+    return minus + ("%." + str(vlen) + "f%s") % (v, value_to_unit[unit])
 
 
 def readable(data, unit=None, include=None, exclude=None):
@@ -110,7 +105,6 @@ def readable(data, unit=None, include=None, exclude=None):
     """
 
     if isinstance(data, dict):
-
         data = data.copy()
 
         keys = set(data.keys())
@@ -145,9 +139,9 @@ def readable(data, unit=None, include=None, exclude=None):
         if data > 999:
             return hunum_int(int(data), unit=unit)
         elif abs(data) < 0.0000000001:
-            return '0'
+            return "0"
         else:
-            return '%.2f' % (data)
+            return "%.2f" % (data)
 
     else:
         return data
@@ -198,16 +192,16 @@ def parsenum(data, safe=None):
         return data
 
     if isinstance(data, bytes):
-        data = data.decode('utf-8')
+        data = data.decode("utf-8")
 
-    if data == '':
+    if data == "":
         return 0
 
-    if data.endswith('%'):
+    if data.endswith("%"):
         fl = float(data[:-1]) / 100.0
         return fl
 
-    data = data.upper().rstrip('B').rstrip('I')
+    data = data.upper().rstrip("B").rstrip("I")
 
     unit_name = data[-1]
 
@@ -227,6 +221,7 @@ def parsenum(data, safe=None):
             raise
 
     return val
+
 
 # if __name__ == "__main__":
 #     import doctest
