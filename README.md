@@ -1,6 +1,6 @@
 # k3num
 
-[![Build Status](https://travis-ci.com/pykit3/k3num.svg?branch=master)](https://travis-ci.com/pykit3/k3num)
+[![Build Status](https://github.com/pykit3/k3num/actions/workflows/python-package.yml/badge.svg)](https://github.com/pykit3/k3num/actions/workflows/python-package.yml)
 ![Python package](https://github.com/pykit3/k3num/workflows/Python%20package/badge.svg)
 [![Documentation Status](https://readthedocs.org/projects/k3num/badge/?version=stable)](https://k3num.readthedocs.io/en/stable/?badge=stable)
 [![Package](https://img.shields.io/pypi/pyversions/k3num)](https://pypi.org/project/k3num)
