@@ -1,10 +1,8 @@
-#!/usr/bin/env python
-# coding: utf-8
-
+import json
 import unittest
 
-import json
 import k3ut
+
 from k3num import Hex
 
 dd = k3ut.dd
@@ -27,7 +25,7 @@ class TestHex(unittest.TestCase):
             dd(inp, expected)
             c = Hex(inp, byte_length)
             self.assertEqual(expected, c.int)
-            self.assertEqual("%06x" % expected, c)
+            self.assertEqual(f"{expected:06x}", c)
 
     def test_attr(self):
         c = Hex("010203", 3)

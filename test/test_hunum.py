@@ -1,7 +1,8 @@
 import unittest
 
-import k3num
 import k3ut
+
+import k3num
 
 dd = k3ut.dd
 
@@ -35,9 +36,7 @@ class TestHunum(unittest.TestCase):
         for _in, _out, _msg in cases:
             rst = k3num.readable(_in)
 
-            msg = "humanize: in: {_in} expect: {_out}, rst: {rst}; {_msg}".format(
-                _in=repr(_in), _out=repr(_out), rst=rst, _msg=_msg
-            )
+            msg = f"humanize: in: {_in!r} expect: {_out!r}, rst: {rst}; {_msg}"
 
             self.assertEqual(_out, rst, msg)
 
@@ -87,9 +86,7 @@ class TestHunum(unittest.TestCase):
         for _in, _out, _msg in cases:
             rst = k3num.parsenum(_in)
 
-            msg = "parse: in: {_in} expect: {_out}, rst: {rst}; {_msg}".format(
-                _in=repr(_in), _out=repr(_out), rst=rst, _msg=_msg
-            )
+            msg = f"parse: in: {_in!r} expect: {_out!r}, rst: {rst}; {_msg}"
 
             self.assertEqual(_out, rst, msg)
             self.assertEqual(0 - _out, k3num.parsenum("-" + _in), msg + ": negative")
@@ -152,11 +149,7 @@ class TestHunum(unittest.TestCase):
         for _in, expected in cases:
             rst = k3num.parsenum(_in)
 
-            msg = "parse: in: {_in} expect: {expected}, rst: {rst}".format(
-                _in=repr(_in),
-                expected=repr(expected),
-                rst=repr(rst),
-            )
+            msg = f"parse: in: {_in!r} expect: {expected!r}, rst: {rst!r}"
 
             self.assertTrue(0.000000001 > expected - rst > -0.000000001, msg)
 
@@ -209,11 +202,7 @@ class TestHunum(unittest.TestCase):
         for _in, expected in cases:
             rst = k3num.parsenum(_in, safe=True)
 
-            msg = "parse: in: {_in} expect: {expected}, rst: {rst}".format(
-                _in=repr(_in),
-                expected=repr(expected),
-                rst=repr(rst),
-            )
+            msg = f"parse: in: {_in!r} expect: {expected!r}, rst: {rst!r}"
             dd(msg)
 
             self.assertEqual(expected, rst)
@@ -231,9 +220,7 @@ class TestHunum(unittest.TestCase):
         for _in, _out, _msg in cases:
             rst = k3num.readable(_in[0], **_in[1])
 
-            msg = "in: {_in} expect: {_out}, rst: {rst}; {_msg}".format(
-                _in=repr(_in), _out=repr(_out), rst=rst, _msg=_msg
-            )
+            msg = f"in: {_in!r} expect: {_out!r}, rst: {rst}; {_msg}"
 
             self.assertEqual(_out, rst, msg)
 
@@ -247,9 +234,7 @@ class TestHunum(unittest.TestCase):
         for _in, _out, _msg in cases:
             rst = k3num.readable(_in)
 
-            msg = "in: {_in} expect: {_out}, rst: {rst}; {_msg}".format(
-                _in=repr(_in), _out=repr(_out), rst=rst, _msg=_msg
-            )
+            msg = f"in: {_in!r} expect: {_out!r}, rst: {rst}; {_msg}"
 
             self.assertEqual(_out, rst, msg)
             self.assertTrue(_in is not rst, "result must not be input")
@@ -263,9 +248,7 @@ class TestHunum(unittest.TestCase):
         for _in, _out, _msg in cases:
             rst = k3num.readable(_in[0], **_in[1])
 
-            msg = "in: {_in} expect: {_out}, rst: {rst}; {_msg}".format(
-                _in=repr(_in), _out=repr(_out), rst=rst, _msg=_msg
-            )
+            msg = f"in: {_in!r} expect: {_out!r}, rst: {rst}; {_msg}"
 
             self.assertEqual(_out, rst, msg)
             self.assertTrue(_in is not rst, "result must not be input")

@@ -25,14 +25,14 @@ from k3num import readable, parsenum
 readable(103425)
 # '101.0K'
 
-readable({'total': 10240, 'progress': [1, 1024*2.1, 1024*3.2]})
+readable({"total": 10240, "progress": [1, 1024 * 2.1, 1024 * 3.2]})
 # {'total': '10K', 'progress': ['1', '2.10K', '3.20K']}
 
 # Parse human-readable strings back to numbers
-parsenum('5.2K')
+parsenum("5.2K")
 # 5324.8
 
-parsenum('10%')
+parsenum("10%")
 # 0.1
 ```
 
@@ -45,14 +45,14 @@ from k3num import Hex
 Hex(0x0102, 4)
 # '00000102'
 
-Hex(0x0102, 'crc32')
+Hex(0x0102, "crc32")
 # '00000102'
 
 # Arithmetic operations on hex strings
-Hex(0x0102, 'crc32') + 1
+Hex(0x0102, "crc32") + 1
 # '00000103'
 
-Hex(0x0102, 'crc32') * 2
+Hex(0x0102, "crc32") * 2
 # '00000204'
 ```
 

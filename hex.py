@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
+from typing import ClassVar
 
 
 class Hex(str):
@@ -33,12 +32,12 @@ class Hex(str):
 
     byte_length = None
 
-    lengths = dict(
-        crc32=4,
-        md5=16,
-        sha1=20,
-        sha256=32,
-    )
+    lengths: ClassVar[dict] = {
+        "crc32": 4,
+        "md5": 16,
+        "sha1": 20,
+        "sha256": 32,
+    }
 
     def __new__(clz, data, byte_length=None):
         if byte_length is None:
@@ -59,13 +58,13 @@ class Hex(str):
             assert isinstance(data, str)
             assert len(data) % 2 == 0
 
-            data += ("%02x" % fillwith) * (byte_length - len(data) // 2)
+            data += f"{fillwith:02x}" * (byte_length - len(data) // 2)
 
         if isinstance(data, int):
             if data < 0:
                 raise ValueError("int/long must be positive but: " + repr(data))
 
-            data = "%0{n}x".format(n=byte_length * 2) % data
+            data = f"{data:0{byte_length * 2}x}"
 
         if not isinstance(data, str):
             raise TypeError("exptect str or int/long, but: " + str(type(data)))
@@ -77,15 +76,13 @@ class Hex(str):
             _hex = data.encode("utf-8").hex()
         else:
             raise ValueError(
-                "str data length must be {l2} for hex, or {l} for byte, but: {act}".format(
-                    l=byte_length, l2=byte_length * 2, act=len(data)
-                )
+                f"str data length must be {byte_length * 2} for hex, or {byte_length} for byte, but: {len(data)}"
             )
 
         _bytes = bytes.fromhex(_hex)
         _long = int(_hex, 16)
 
-        x = super(Hex, clz).__new__(clz, _hex)
+        x = super().__new__(clz, _hex)
         x.hex = _hex
         x.bytes = _bytes
         x.int = _long
@@ -120,11 +117,10 @@ class Hex(str):
         elif isinstance(x, int):
             return x
         else:
-            raise TypeError(str(type(self)) + " does not support arithmetic operation with {b}".format(b=repr(x)))
+            raise TypeError(str(type(self)) + f" does not support arithmetic operation with {x!r}")
 
     def _arithm(self, x):
-        if x < 0:
-            x = 0
+        x = max(x, 0)
 
         if x >= 256**self.byte_length:
             x = 256**self.byte_length - 1

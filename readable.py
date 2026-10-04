@@ -1,5 +1,4 @@
 #!/usr/bin/env python2
-# coding: utf-8
 
 
 K = 1024**1
@@ -23,9 +22,9 @@ value_to_unit = {
     Y: "Y",
 }
 
-unit_to_value = dict([(v, k) for (k, v) in value_to_unit.items() if v != ""])
+unit_to_value = {v: k for (k, v) in value_to_unit.items() if v != ""}
 
-integer_types = (type(0),)
+integer_types = (int,)
 
 
 def hunum_int(i, unit=None):
@@ -52,7 +51,7 @@ def hunum_int(i, unit=None):
     v = i * 1.0 / unit
 
     if v == int(v):
-        return minus + "%d%s" % (v, value_to_unit[unit])
+        return minus + f"{int(v)}{value_to_unit[unit]}"
 
     if v > 10:
         vlen = 1
@@ -141,7 +140,7 @@ def readable(data, unit=None, include=None, exclude=None):
         elif abs(data) < 0.0000000001:
             return "0"
         else:
-            return "%.2f" % (data)
+            return f"{data:.2f}"
 
     else:
         return data
