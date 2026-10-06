@@ -169,13 +169,13 @@ def parsenum(data, safe=None):
             For percentage number, valid unit is `%`.
             For example: `10.1%`.
 
-        safe: if `safe` is `True` and data is not a valid number string, it silently
+        safe(bool): if `safe` is `True` and data is not a valid number string, it silently
             returns the original `data`, instead of raising an `ValueError`.
 
             By default it is `False`.
 
     Returns:
-        int/float.
+        (int | float): the parsed number.
 
     """
 
