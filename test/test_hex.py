@@ -59,6 +59,14 @@ class TestHex(unittest.TestCase):
             else:
                 self.assertRaises(err, Hex, inp, byte_length)
 
+    def test_byte_length_missing(self):
+        self.assertRaises(TypeError, Hex, "010203")
+
+        class Hex3(Hex):
+            byte_length = 3
+
+        self.assertEqual("010203", Hex3("010203"))
+
     def test_named_length(self):
         val = 0x010203
         cases = (
@@ -104,6 +112,20 @@ class TestHex(unittest.TestCase):
             self.assertEqual(expected, c)
 
         self.assertEqual("12340101", Hex((pref, 1), "crc32"))
+        self.assertEqual("1234ffff", Hex((pref, 0xFF), "crc32"))
+
+    def test_prefix_invalid(self):
+        cases = (
+            (("1234", 1.0), TypeError),
+            (("1234", -1), ValueError),
+            (("1234", 0x100), ValueError),
+            ((b"\x12\x34", 0), TypeError),
+            (("123", 0), ValueError),
+        )
+
+        for inp, err in cases:
+            dd(inp, err)
+            self.assertRaises(err, Hex, inp, "crc32")
 
     def test_str_repr(self):
         c = Hex.crc32(1)

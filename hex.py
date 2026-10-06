@@ -43,7 +43,8 @@ class Hex(str):
         if byte_length is None:
             byte_length = clz.byte_length
 
-            assert byte_length is not None
+            if byte_length is None:
+                raise TypeError("byte_length must be specified, but: " + repr(byte_length))
 
         if isinstance(byte_length, str):
             # convert named length to number
@@ -53,10 +54,14 @@ class Hex(str):
         if isinstance(data, (list, tuple)):
             data, fillwith = data
 
-            assert isinstance(fillwith, int)
-            assert 0 <= fillwith <= 0xFF
-            assert isinstance(data, str)
-            assert len(data) % 2 == 0
+            if not isinstance(fillwith, int):
+                raise TypeError("filling_byte must be int, but: " + repr(fillwith))
+            if not 0 <= fillwith <= 0xFF:
+                raise ValueError("filling_byte must be in [0, 0xFF], but: " + repr(fillwith))
+            if not isinstance(data, str):
+                raise TypeError("prefix_hex must be str, but: " + repr(data))
+            if len(data) % 2 != 0:
+                raise ValueError("prefix_hex length must be even, but: " + repr(data))
 
             data += f"{fillwith:02x}" * (byte_length - len(data) // 2)
 
