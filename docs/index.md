@@ -60,6 +60,11 @@ Hex(0x0102, "crc32") * 2
 
 ::: k3num
 
+::: k3num.readable.readable
+    options:
+      heading_level: 3
+      show_root_full_path: false
+
 ## License
 
 The MIT License (MIT) - Copyright (c) 2015 Zhang Yanpo (张炎泼)

@@ -81,13 +81,13 @@ def readable(data, unit=None, include=None, exclude=None):
             If it is None, a proper unit will be chosen to output the shortest string.
             For example, for `102400` it chooses `K`. For `10240000` it chooses `M`.
 
-        include(bool): specifies to convert only a subset of the keys of a `dict` `data`.
+        include(list | tuple | set): specifies to convert only a subset of the keys of a `dict` `data`.
             It could be a `list`, `tuple` or `set` of keys.
 
             -   It has no effect on a primitive `data`.
             -   It is not passed to sub `dict` or `list`.
 
-        exclude(bool): specifies **NOT** to convert some of the keys of a `dict`
+        exclude(list | tuple | set): specifies **NOT** to convert some of the keys of a `dict`
             `data`.  It could be a `list`, `tuple` or `set` of keys.
 
             -   It has no effect on a primitive `data`.
