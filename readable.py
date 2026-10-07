@@ -68,7 +68,7 @@ def readable(data, unit=None, include=None, exclude=None):
     readable convert number or dict/list of number to string in a format easy to read for human.
 
     Args:
-        data: could be a primitive type: `int` or `float`,
+        data(int | float | dict | list): could be a primitive type: `int` or `float`,
             or a non-primitive type object `list` or `dict`.
 
             -   For primitive type like `int`, it converts it to string.
@@ -94,13 +94,12 @@ def readable(data, unit=None, include=None, exclude=None):
             -   It is not passed to sub `dict` or `list`.
 
     Returns:
+        (str | dict | list): the converted `data`.
 
-        int/dict/list.
-
-        -   For a primitive type data, it returns a string representing the number.
-        -   For a `dict` or `list`, it makes a duplicate of `data` and convert its
-            number fields.
-            It leaves the original `data` intact.
+            -   For a primitive type data, it returns a string representing the number.
+            -   For a `dict` or `list`, it makes a duplicate of `data` and convert its
+                number fields.
+                It leaves the original `data` intact.
     """
 
     if isinstance(data, dict):

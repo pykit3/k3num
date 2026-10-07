@@ -10,19 +10,6 @@ class Hex(str):
 
     NOTE: **it overrides native `str` operation such as `str + str`**.
 
-    Args:
-
-        data: can be a `str`, `int` or tuple in form of `(<prefix_hex>, <filling_byte>)`
-
-        byte_length:
-            specifies number of bytes for this hex.
-            It can not be changed after creating it.
-
-            > byte length x 2 = hex length
-
-            It also can be a symblic name: `crc32`, `md5`, `sha1` or `sha256`.
-
-
     Attributes:
         hex (str): a plain string of hex `'00000102'`.
         bytes (bytes): a plain string of bytes `b'\0\0\1\2'`.
@@ -40,6 +27,20 @@ class Hex(str):
     }
 
     def __new__(clz, data, byte_length=None):
+        """
+        Create a `Hex` instance.
+
+        Args:
+            data(str | int | tuple): can be a `str`, `int` or tuple in form of `(<prefix_hex>, <filling_byte>)`
+
+            byte_length(int | str):
+                specifies number of bytes for this hex.
+                It can not be changed after creating it.
+
+                > byte length x 2 = hex length
+
+                It also can be a symblic name: `crc32`, `md5`, `sha1` or `sha256`.
+        """
         if byte_length is None:
             byte_length = clz.byte_length
 
