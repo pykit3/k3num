@@ -39,7 +39,7 @@ class Hex(str):
 
                 > byte length x 2 = hex length
 
-                It also can be a symblic name: `crc32`, `md5`, `sha1` or `sha256`.
+                It also can be a symbolic name: `crc32`, `md5`, `sha1` or `sha256`.
         """
         if byte_length is None:
             byte_length = clz.byte_length
@@ -68,12 +68,12 @@ class Hex(str):
 
         if isinstance(data, int):
             if data < 0:
-                raise ValueError("int/long must be positive but: " + repr(data))
+                raise ValueError("int must be positive but: " + repr(data))
 
             data = f"{data:0{byte_length * 2}x}"
 
         if not isinstance(data, str):
-            raise TypeError("exptect str or int/long, but: " + str(type(data)))
+            raise TypeError("expect str or int, but: " + str(type(data)))
 
         if len(data) == byte_length * 2:
             # new from hex string
