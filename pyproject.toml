@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "k3num"
-version = "0.1.12"
+version = "0.1.13"
 description = "Human-readable number formatting and hex string utilities"
 readme = "README.md"
 license = "MIT"
