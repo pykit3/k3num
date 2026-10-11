@@ -43,10 +43,10 @@ def hunum_int(i, unit=None):
         while i // unit > 0:
             unit *= K
 
-        unit /= K
+        unit //= K
 
         while unit not in value_to_unit:
-            unit /= K
+            unit //= K
 
     v = i * 1.0 / unit
 
