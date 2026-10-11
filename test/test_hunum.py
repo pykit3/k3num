@@ -197,6 +197,18 @@ class TestHunum(unittest.TestCase):
                 "1..01",
                 "1..01",
             ),
+            (
+                "bad%",
+                "bad%",
+            ),
+            (
+                "B",
+                "B",
+            ),
+            (
+                "Ki",
+                "Ki",
+            ),
         )
 
         for _in, expected in cases:
@@ -210,6 +222,12 @@ class TestHunum(unittest.TestCase):
             if not isinstance(expected, (str, bytes)):
                 rst = k3num.parseint(_in, safe=True)
                 self.assertEqual(int(expected), rst)
+
+    def test_parse_invalid(self):
+        # Without safe, every malformed string raises ValueError.
+        for _in in ("bad%", "%", "B", "K", "Ki", "1Kqq"):
+            with self.assertRaises(ValueError, msg=repr(_in)):
+                k3num.parsenum(_in)
 
     def test_specified_unit(self):
         cases = (

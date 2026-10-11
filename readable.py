@@ -195,15 +195,16 @@ def parsenum(data, safe=None):
     if data == "":
         return 0
 
-    if data.endswith("%"):
-        fl = float(data[:-1]) / 100.0
-        return fl
-
-    data = data.upper().rstrip("B").rstrip("I")
-
-    unit_name = data[-1]
-
     try:
+        if data.endswith("%"):
+            fl = float(data[:-1]) / 100.0
+            return fl
+
+        data = data.upper().rstrip("B").rstrip("I")
+
+        # A suffix with no number leaves "" here, and float("") raises ValueError.
+        unit_name = data[-1:]
+
         if unit_name in unit_to_value:
             val = float(data[:-1]) * unit_to_value[unit_name]
         else:
