@@ -71,6 +71,26 @@ class TestHex(unittest.TestCase):
 
         self.assertRaises(ValueError, Hex, "\u6211", 1)
 
+    def test_bytes_length(self):
+        # bytes has byte_length bytes, whatever form the Hex is built from.
+        class Hex3(Hex):
+            byte_length = 3
+
+        cases = (
+            Hex(0x0102, 3),
+            Hex("000102", 3),
+            Hex("\0\1\2", 3),
+            Hex("\u6211", 3),
+            Hex(("01", 2), 3),
+            Hex(["01", 2], 3),
+            Hex(0x0102, "crc32"),
+            Hex3(0x0102),
+        )
+
+        for c in cases:
+            dd(repr(c))
+            self.assertEqual(c.byte_length, len(c.bytes))
+
     def test_byte_length_missing(self):
         self.assertRaises(TypeError, Hex, "010203")
 
