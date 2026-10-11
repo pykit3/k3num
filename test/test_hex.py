@@ -49,6 +49,9 @@ class TestHex(unittest.TestCase):
             ("01020", ValueError),
             ("0102030", ValueError),
             ("01020304", ValueError),
+            # 3 chars, but 4 and 5 bytes in UTF-8.
+            ("\u00e9\1\2", ValueError),
+            ("\u6211\1\2", ValueError),
             ({}, TypeError),
         )
 
@@ -58,6 +61,15 @@ class TestHex(unittest.TestCase):
                 Hex(inp, byte_length)
             else:
                 self.assertRaises(err, Hex, inp, byte_length)
+
+    def test_init_utf8(self):
+        # A str of bytes is encoded with UTF-8, so its byte count is checked after encoding.
+        c = Hex("\u6211", 3)
+        self.assertEqual(b"\xe6\x88\x91", c.bytes)
+        self.assertEqual("e68891", c.hex)
+        self.assertEqual(3, c.byte_length)
+
+        self.assertRaises(ValueError, Hex, "\u6211", 1)
 
     def test_byte_length_missing(self):
         self.assertRaises(TypeError, Hex, "010203")

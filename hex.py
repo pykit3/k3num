@@ -75,14 +75,17 @@ class Hex(str):
         if not isinstance(data, str):
             raise TypeError("expect str or int, but: " + str(type(data)))
 
+        # A non-ASCII character takes more than one byte in UTF-8.
+        utf8 = data.encode("utf-8")
+
         if len(data) == byte_length * 2:
             # new from hex string
             _hex = data
-        elif len(data) == byte_length:
-            _hex = data.encode("utf-8").hex()
+        elif len(utf8) == byte_length:
+            _hex = utf8.hex()
         else:
             raise ValueError(
-                f"str data length must be {byte_length * 2} for hex, or {byte_length} for byte, but: {len(data)}"
+                f"str data must be {byte_length * 2} hex chars or {byte_length} bytes in UTF-8, but: {data!r}"
             )
 
         _bytes = bytes.fromhex(_hex)
