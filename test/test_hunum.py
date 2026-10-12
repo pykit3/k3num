@@ -229,6 +229,15 @@ class TestHunum(unittest.TestCase):
             with self.assertRaises(ValueError, msg=repr(_in)):
                 k3num.parsenum(_in)
 
+    def test_parse_not_finite(self):
+        # float() accepts these strings, but inf and nan are not numbers for parsenum().
+        for _in in ("inf", "-inf", "nan", "1e400", "1e308K", "inf%", "nan%"):
+            with self.assertRaises(ValueError, msg=repr(_in)):
+                k3num.parsenum(_in)
+
+            rst = k3num.parsenum(_in, safe=True)
+            self.assertEqual(_in, rst)
+
     def test_specified_unit(self):
         cases = (
             ((1024**2, {"unit": 1024}), "1024K", ""),

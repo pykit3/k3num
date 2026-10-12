@@ -1,5 +1,6 @@
 #!/usr/bin/env python2
 
+import math
 
 K = 1024**1
 M = 1024**2
@@ -168,6 +169,9 @@ def parsenum(data, safe=None):
             For percentage number, valid unit is `%`.
             For example: `10.1%`.
 
+            `inf`, `nan` and a number too large for a `float`, such as `1e400`,
+            are not valid.
+
         safe(bool): if `safe` is `True` and data is not a valid number string, it silently
             returns the original `data`, instead of raising an `ValueError`.
 
@@ -198,6 +202,8 @@ def parsenum(data, safe=None):
     try:
         if data.endswith("%"):
             fl = float(data[:-1]) / 100.0
+            if not math.isfinite(fl):
+                raise ValueError(f"not a finite number: {original!r}")
             return fl
 
         data = data.upper().rstrip("B").rstrip("I")
@@ -209,6 +215,9 @@ def parsenum(data, safe=None):
             val = float(data[:-1]) * unit_to_value[unit_name]
         else:
             val = float(data)
+
+        if not math.isfinite(val):
+            raise ValueError(f"not a finite number: {original!r}")
 
         if val == int(val):
             val = int(val)
