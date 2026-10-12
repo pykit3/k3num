@@ -82,6 +82,8 @@ def readable(data, unit=None, include=None, exclude=None):
             If it is None, a proper unit will be chosen to output the shortest string.
             For example, for `102400` it chooses `K`. For `10240000` it chooses `M`.
 
+            It is passed to the items of a `list` or `dict`, at every level.
+
         include(list | tuple | set): specifies to convert only a subset of the keys of a `dict` `data`.
             It could be a `list`, `tuple` or `set` of keys.
 
@@ -114,7 +116,7 @@ def readable(data, unit=None, include=None, exclude=None):
             keys = keys - set(exclude)
 
         for k in keys:
-            data[k] = readable(data[k])
+            data[k] = readable(data[k], unit=unit)
 
         return data
 
@@ -126,7 +128,7 @@ def readable(data, unit=None, include=None, exclude=None):
         return data
 
     elif isinstance(data, list):
-        return [readable(x) for x in data]
+        return [readable(x, unit=unit) for x in data]
 
     elif isinstance(data, (str, bytes)):
         return data

@@ -251,6 +251,20 @@ class TestHunum(unittest.TestCase):
 
             self.assertEqual(_out, rst, msg)
 
+    def test_specified_unit_in_list_and_dict(self):
+        # unit applies to the numbers at every level, but include stays top-level only.
+        m = 1024**2
+        cases = (
+            (([10240], {"unit": m}), ["0.010M"]),
+            (({"a": 10240}, {"unit": m}), {"a": "0.010M"}),
+            (([{"a": [m * 10]}], {"unit": 1024}), [{"a": ["10240K"]}]),
+            (({"a": {"b": 10240}, "c": 10240}, {"unit": m, "include": ["a"]}), {"a": {"b": "0.010M"}, "c": 10240}),
+        )
+
+        for (data, kwargs), want in cases:
+            rst = k3num.readable(data, **kwargs)
+            self.assertEqual(want, rst, repr((data, kwargs)))
+
     def test_non_primitive(self):
         cases = (
             ({"a": 10240}, {"a": "10K"}, ""),
